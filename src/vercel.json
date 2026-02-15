@@ -1,0 +1,4 @@
+{
+  "builds": [{ "src": "target/release/hmu-ai", "use": "@vercel/static" }],
+  "routes": [{ "src": "/.*", "dest": "/target/release/hmu-ai" }]
+}
