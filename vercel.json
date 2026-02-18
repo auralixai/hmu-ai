@@ -1,1 +1,1 @@
-{ \"rewrites\": [{ \"source\": \"/audit\", \"destination\": \"/api/audit\" }] }
+{\"rewrites\":[{\"source\":\"/audit\",\"destination\":\"/api/audit\"}],\"functions\":{\"api/audit.js\":{\"runtime\":\"nodejs18.x\"}}}
