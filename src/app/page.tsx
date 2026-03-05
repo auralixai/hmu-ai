@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Bot, Code, Hammer, Briefcase, DollarSign } from "lucide-react";
+import { industries } from "../data/industries";
 
 export default function Home() {
   return (
@@ -12,6 +13,9 @@ export default function Home() {
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="#features">
             Features
+          </Link>
+          <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="#use-cases">
+            Use Cases
           </Link>
         </nav>
       </header>
@@ -74,6 +78,32 @@ export default function Home() {
                   Runs daily operations, manages memory, and handles maintenance.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+        <section id="use-cases" className="w-full py-24 bg-black border-t border-gray-900">
+          <div className="container px-4 md:px-6 mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Who We Help</h2>
+              <p className="mx-auto max-w-md text-gray-400 md:text-lg mt-4">Specialized AI agents for your industry</p>
+            </div>
+            <div className="grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+              {industries.map(({ slug, name, heroHeadline }) => (
+                <Link 
+                  key={slug} 
+                  href={`/use-cases/${slug}`} 
+                  className="group"
+                >
+                  <div className="flex flex-col gap-3 p-6 border border-gray-800 rounded-xl bg-zinc-950 hover:border-blue-500/50 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 h-full">
+                    <h3 className="font-bold text-xl">{name}</h3>
+                    <p className="text-sm text-gray-400 leading-relaxed flex-1">{heroHeadline}</p>
+                    <div className="flex items-center gap-2 pt-1">
+                      <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Learn More</span>
+                      <ArrowRight className="h-4 w-4 text-blue-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all ml-auto" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
