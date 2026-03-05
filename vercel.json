@@ -1,1 +1,13 @@
-{\"rewrites\":[{\"source\":\"/audit\",\"destination\":\"/api/audit\"}],\"functions\":{\"api/audit.js\":{\"runtime\":\"nodejs18.x\"}}}
+{
+  "rewrites": [
+    {
+      "source": "/audit",
+      "destination": "/api/audit"
+    }
+  ],
+  "functions": {
+    "api/audit.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}
