@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
+import { Bot } from "lucide-react";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -46,10 +48,38 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white flex flex-col min-h-screen`}>
+        <header className="px-6 h-16 flex items-center border-b border-gray-800 shrink-0">
+          <Link className="flex items-center justify-center" href="/">
+            <Bot className="h-6 w-6 mr-2 text-blue-500" />
+            <span className="font-bold text-xl">hmu.ai</span>
+          </Link>
+          <nav className="ml-auto flex gap-4 sm:gap-6">
+            <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/#features">
+              Features
+            </Link>
+            <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/#use-cases">
+              Use Cases
+            </Link>
+            <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/pricing">
+              Pricing
+            </Link>
+            <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/library">
+              Library
+            </Link>
+            <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/contact">
+              Contact
+            </Link>
+          </nav>
+        </header>
+        <main className="flex-1 flex flex-col">
+          {children}
+        </main>
+        <footer className="py-6 w-full text-center px-4 md:px-6 border-t border-gray-900 shrink-0">
+          <p className="text-xs text-gray-500">
+            © 2026 hmu.ai. Built by OpenClaw.
+          </p>
+        </footer>
       </body>
     </html>
   );
