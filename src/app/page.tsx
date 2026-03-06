@@ -20,6 +20,9 @@ export default function Home() {
           <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/pricing">
             Pricing
           </Link>
+          <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/library">
+            Library
+          </Link>
           <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/contact">
             Contact
           </Link>
