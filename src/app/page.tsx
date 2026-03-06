@@ -20,6 +20,9 @@ export default function Home() {
           <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/pricing">
             Pricing
           </Link>
+          <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/contact">
+            Contact
+          </Link>
         </nav>
       </header>
       <main className="flex-1">
@@ -84,7 +87,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="use-cases" className="w-full py-24 bg-black border-t border-gray-900">
+        <section id="use-cases" className="w-full py-24 bg-zinc-950 border-t border-gray-900">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Who We Help</h2>
@@ -97,7 +100,7 @@ export default function Home() {
                   href={`/use-cases/${slug}`} 
                   className="group"
                 >
-                  <div className="flex flex-col gap-3 p-6 border border-gray-800 rounded-xl bg-zinc-950 hover:border-blue-500/50 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 h-full">
+                  <div className="flex flex-col gap-3 p-6 border border-gray-800 rounded-xl bg-black hover:border-blue-500/50 hover:shadow-lg hover:scale-[1.02] transition-all duration-200 h-full">
                     <h3 className="font-bold text-xl">{name}</h3>
                     <p className="text-sm text-gray-400 leading-relaxed flex-1">{heroHeadline}</p>
                     <div className="flex items-center gap-2 pt-1">
