@@ -17,6 +17,9 @@ export default function Home() {
           <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="#use-cases">
             Use Cases
           </Link>
+          <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/pricing">
+            Pricing
+          </Link>
         </nav>
       </header>
       <main className="flex-1">
