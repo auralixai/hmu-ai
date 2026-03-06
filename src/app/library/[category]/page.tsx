@@ -8,9 +8,10 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function DictionaryCategory({ params }: { params: { category: string } }) {
-  const terms = getDictionaryTerms(params.category);
-  const metadata = dictionaryMetadata[params.category];
+export default async function DictionaryCategory({ params }: { params: Promise<{ category: string }> }) {
+  const resolvedParams = await params;
+  const terms = getDictionaryTerms(resolvedParams.category);
+  const metadata = dictionaryMetadata[resolvedParams.category];
 
   if (!terms.length || !metadata) {
     return (
