@@ -58,7 +58,7 @@ export default function RootLayout({
             <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/#features">
               Features
             </Link>
-            <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/#use-cases">
+            <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/use-cases">
               Use Cases
             </Link>
             <Link className="text-sm font-medium hover:text-blue-400 transition-colors" href="/pricing">
