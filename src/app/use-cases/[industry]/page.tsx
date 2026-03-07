@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: { industry: string 
   }
   return {
     title: `AI Agent Use Cases for ${industry.name}`,
-    description: industry.heroDescription,
+    description: industry.description,
   };
 }
 
@@ -54,7 +54,7 @@ export default function IndustryPage({ params }: { params: { industry: string } 
             {industry.name}
           </h1>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-            {industry.heroDescription}
+            {industry.description}
           </p>
            <div className="mt-4 text-sm">
              <Link href="/use-cases" className="text-gray-400 hover:text-white transition-colors">

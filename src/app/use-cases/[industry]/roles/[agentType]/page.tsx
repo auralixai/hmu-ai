@@ -75,7 +75,7 @@ export default function AgentTypePage({ params }: { params: { industry: string; 
           </p>
           <div className="mt-4 text-sm">
              <Link href={`/use-cases/${industry.slug}`} className="text-gray-400 hover:text-white transition-colors">
-                &larr; Back to {industry.name}
+                ← Back to {industry.name}
              </Link>
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function AgentTypePage({ params }: { params: { industry: string; 
             {filteredAgents.map(agent => (
               <Link
                 key={agent.slug}
-                href={`/use-cases/${industry.slug}/${agent.slug}`}
+                href={`/use-cases/${industrySlug}/${agent.slug}`}
                 className="group block h-full"
               >
                 <div className="flex flex-col p-8 border border-gray-800 rounded-3xl bg-zinc-950 hover:border-white/20 hover:bg-zinc-900 transition-all duration-300 h-full relative overflow-hidden">
@@ -95,7 +95,7 @@ export default function AgentTypePage({ params }: { params: { industry: string; 
                      <Target className={`h-5 w-5 ${colorClass} flex-shrink-0`} />
                      <h3 className="font-semibold text-lg text-white">{agent.taskName}</h3>
                   </div>
-                  <p className="text-gray-400 text-sm leading-relaxed flex-1 mb-6">{agent.shortDescription}</p>
+                  <p className="text-gray-400 text-sm leading-relaxed flex-1 mb-6">{agent.taskName.slice(0, 100)}...</p>
                   <div className="flex items-center justify-end text-xs font-semibold text-gray-500 group-hover:text-white transition-colors mt-auto">
                     View Agent Details <ArrowUpRight className="ml-1 h-4 w-4" />
                   </div>
