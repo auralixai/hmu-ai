@@ -12,6 +12,12 @@ import { financeTerms } from './dictionaries/finance';
 export interface Term {
   name: string;
   definition: string;
+  slug?: string;
+  seoData?: {
+    detailedDescription?: string;
+    examples?: string[];
+    relatedTerms?: string[];
+  };
 }
 
 export const dictionaries: Record<string, Term[]> = {

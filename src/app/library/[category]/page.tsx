@@ -44,14 +44,15 @@ export default async function DictionaryCategory({ params }: { params: Promise<{
         </div>
 
         <div className="space-y-6">
-          {terms.map((term, index) => (
-            <div 
+          {terms.map((term) => (
+            <Link 
+              href={`/library/${resolvedParams.category}/${term.slug || term.name.toLowerCase().replace(/\s+/g, '-')}`}
               key={term.name}
-              className="p-6 bg-zinc-950 border border-gray-800 rounded-2xl hover:border-gray-700 transition-colors"
+              className="block p-6 bg-zinc-950 border border-gray-800 rounded-2xl hover:border-gray-700 hover:bg-zinc-900 transition-all cursor-pointer"
             >
               <h3 className="text-2xl font-bold mb-3 text-blue-400">{term.name}</h3>
-              <p className="text-gray-300 leading-relaxed text-lg">{term.definition}</p>
-            </div>
+              <p className="text-gray-300 leading-relaxed text-lg line-clamp-2">{term.definition}</p>
+            </Link>
           ))}
         </div>
       </div>
