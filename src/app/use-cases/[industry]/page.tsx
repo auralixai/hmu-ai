@@ -1,102 +1,100 @@
-import { industries, getIndustryBySlug } from "@/data/industries";
-import { getAgentsByIndustry } from "@/data/agents";
+import { industries } from "@/data/industries";
+import { agentUseCases } from "@/data/agents";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowRight, Bot, Code, Hammer, Briefcase, DollarSign, Target } from "lucide-react";
+import { ArrowRight, Briefcase, Hammer, DollarSign, Code, ArrowUpRight } from "lucide-react";
+import type { Metadata } from "next";
 
 export async function generateStaticParams() {
-  return industries.map((industry) => ({
+  return industries.map(industry => ({
     industry: industry.slug,
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ industry: string }> }) {
-  const resolvedParams = await params;
-  const industryData = getIndustryBySlug(resolvedParams.industry);
-  
-  if (!industryData) return { title: "Not Found" };
-
+export async function generateMetadata({ params }: { params: { industry: string } }): Promise<Metadata> {
+  const industry = industries.find(i => i.slug === params.industry);
+  if (!industry) {
+    return {
+      title: "Industry Not Found"
+    }
+  }
   return {
-    title: `${industryData.heroHeadline} | hmu.ai`,
-    description: industryData.description,
+    title: `AI Agent Use Cases for ${industry.name}`,
+    description: industry.heroDescription,
   };
 }
 
-export default async function IndustryPage({ params }: { params: Promise<{ industry: string }> }) {
-  const resolvedParams = await params;
-  const industryData = getIndustryBySlug(resolvedParams.industry);
+const agentTypes = [
+  { name: "Architect", slug: "architect", description: "High-level strategic planning, system design, and project roadmapping.", icon: Briefcase, color: "blue" },
+  { name: "Builder", slug: "builder", description: "Hands-on execution, coding, content creation, and technical implementation.", icon: Hammer, color: "green" },
+  { name: "Money", slug: "money", description: "Financial analysis, revenue tracking, payment processing, and market insights.", icon: DollarSign, color: "yellow" },
+  { name: "Operator", slug: "operator", description: "Daily operations, process automation, customer support, and system maintenance.", icon: Code, color: "purple" },
+];
 
-  if (!industryData) notFound();
+export default function IndustryPage({ params }: { params: { industry: string } }) {
+  const industry = industries.find(i => i.slug === params.industry);
 
-  const agents = getAgentsByIndustry(resolvedParams.industry);
+  if (!industry) {
+    notFound();
+  }
+  
+  const agentCounts = {
+    architect: agentUseCases.filter(a => a.industrySlug === industry.slug && a.agentType === 'Architect').length,
+    builder: agentUseCases.filter(a => a.industrySlug === industry.slug && a.agentType === 'Builder').length,
+    money: agentUseCases.filter(a => a.industrySlug === industry.slug && a.agentType === 'Money').length,
+    operator: agentUseCases.filter(a => a.industrySlug === industry.slug && a.agentType === 'Operator').length,
+  };
 
   return (
-    <>
-      <section className="w-full py-24 md:py-32 lg:py-48">
-        <div className="container px-4 md:px-6 mx-auto text-center">
-          <div className="flex flex-col items-center space-y-8">
-            <div className="space-y-4">
-              <div className="inline-block rounded-lg bg-blue-500/10 px-3 py-1 text-sm text-blue-500 border border-blue-500/20 mb-4">
-                AI for {industryData.name}
-              </div>
-              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl max-w-4xl mx-auto">
-                {industryData.heroHeadline}
-              </h1>
-              <p className="mx-auto max-w-[700px] text-gray-400 md:text-xl">
-                {industryData.description}
-              </p>
-            </div>
-            <div className="flex gap-4">
-              <Link
-                className="inline-flex h-12 items-center justify-center rounded-md bg-white px-8 text-sm font-bold text-black shadow transition-colors hover:bg-gray-200"
-                href="#agents"
-              >
-                View Specialized Agents <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </div>
+    <div className="w-full">
+      <section className="py-24 md:py-32 bg-zinc-950 border-b border-gray-800">
+        <div className="container mx-auto px-4 md:px-6 text-center">
+          <p className="text-blue-400 font-semibold mb-3">Use Cases</p>
+          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-6">
+            {industry.name}
+          </h1>
+          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+            {industry.heroDescription}
+          </p>
+           <div className="mt-4 text-sm">
+             <Link href="/use-cases" className="text-gray-400 hover:text-white transition-colors">
+                &larr; Back to All Industries
+             </Link>
           </div>
         </div>
       </section>
 
-      {/* Agents Grid */}
-      <section id="agents" className="w-full py-24 bg-zinc-950 border-t border-gray-900">
-        <div className="container px-4 md:px-6 mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">
-              Deploy Hyper-Focused {industryData.name} Agents
-            </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              Select an agent below to see its exact prompt, ROI, and integration details.
-            </p>
-          </div>
-          
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {agents.map((agent) => (
-              <Link 
-                key={agent.slug}
-                href={`/use-cases/${industryData.slug}/${agent.slug}`}
-                className="group flex flex-col p-5 bg-black border border-gray-800 rounded-xl hover:border-blue-500/50 transition-colors duration-300"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className={`p-2 rounded-lg ${
-                    agent.agentType === 'Architect' ? 'bg-blue-500/10 text-blue-500' :
-                    agent.agentType === 'Builder' ? 'bg-green-500/10 text-green-500' :
-                    agent.agentType === 'Money' ? 'bg-yellow-500/10 text-yellow-500' :
-                    'bg-purple-500/10 text-purple-500'
-                  }`}>
-                    <Target className="h-4 w-4" />
+      <section className="py-24">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {agentTypes.map(type => {
+              const Icon = type.icon;
+              const count = agentCounts[type.slug as keyof typeof agentCounts];
+              return (
+                <Link
+                  key={type.slug}
+                  href={`/use-cases/${industry.slug}/${type.slug}`}
+                  className="group block h-full"
+                >
+                  <div className={`flex flex-col p-8 border border-gray-800 rounded-3xl bg-black hover:border-${type.color}-500/50 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.15)] transition-all duration-300 h-full relative overflow-hidden`}>
+                     <div className={`absolute top-0 right-0 bg-${type.color}-500/10 text-${type.color}-400 text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-3xl`}>
+                       {count} Agents
+                    </div>
+                    <div className={`p-4 bg-${type.color}-500/10 rounded-2xl w-fit mb-6 text-${type.color}-500 group-hover:scale-110 transition-transform`}>
+                      <Icon className="h-8 w-8" />
+                    </div>
+                    <h3 className="font-bold text-2xl mb-3">{type.name}</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-1">{type.description}</p>
+                    <div className={`flex items-center text-sm font-semibold text-${type.color}-400 group-hover:text-${type.color}-300 transition-colors mt-auto`}>
+                      View Agents <ArrowUpRight className="ml-1 h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    </div>
                   </div>
-                  <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">{agent.agentType}</span>
-                </div>
-                <h3 className="font-bold text-gray-100 mb-2">{agent.taskName}</h3>
-                <div className="mt-auto pt-4 flex items-center text-sm font-semibold text-blue-400 group-hover:text-blue-300 transition-colors">
-                  View Setup <ArrowRight className="ml-1 h-3 w-3 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
