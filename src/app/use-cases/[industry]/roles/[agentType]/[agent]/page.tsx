@@ -1,20 +1,20 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, CheckCircle2, Terminal, Network, MessageSquare, Target } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Terminal, Network, MessageSquare, Target } from "lucide-react";
 import { getIndustryBySlug } from "@/data/industries";
 import { getAgentBySlug, agentUseCases } from "@/data/agents";
 
 export async function generateStaticParams() {
   return agentUseCases.map((agent) => ({
     industry: agent.industrySlug,
+    agentType: agent.agentType.toLowerCase(),
     agent: agent.slug,
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ industry: string, agent: string }> }) {
-  const resolvedParams = await params;
-  const industryData = getIndustryBySlug(resolvedParams.industry);
-  const agentData = getAgentBySlug(resolvedParams.industry, resolvedParams.agent);
+export async function generateMetadata({ params }: { params: { industry: string, agentType: string, agent: string } }) {
+  const industryData = getIndustryBySlug(params.industry);
+  const agentData = getAgentBySlug(params.industry, params.agent);
 
   if (!agentData || !industryData) return { title: "Agent Not Found" };
 
@@ -24,12 +24,13 @@ export async function generateMetadata({ params }: { params: Promise<{ industry:
   };
 }
 
-export default async function AgentPage({ params }: { params: Promise<{ industry: string, agent: string }> }) {
-  const resolvedParams = await params;
-  const industryData = getIndustryBySlug(resolvedParams.industry);
-  const agentData = getAgentBySlug(resolvedParams.industry, resolvedParams.agent);
+export default async function AgentPage({ params }: { params: { industry: string, agentType: string, agent: string } }) {
+  const industryData = getIndustryBySlug(params.industry);
+  const agentData = getAgentBySlug(params.industry, params.agent);
 
-  if (!agentData || !industryData) notFound();
+  if (!agentData || !industryData || agentData.agentType.toLowerCase() !== params.agentType) {
+    notFound();
+  }
 
   // Color mapping based on Agent Type
   const theme = {
@@ -43,10 +44,10 @@ export default async function AgentPage({ params }: { params: Promise<{ industry
     <div className="min-h-screen bg-black text-white py-24">
       <div className="container px-4 md:px-6 mx-auto max-w-5xl">
         <Link 
-          href={`/use-cases/${industryData.slug}`} 
+          href={`/use-cases/${industryData.slug}/roles/${params.agentType}`} 
           className="inline-flex items-center text-gray-400 hover:text-white mb-10 transition-colors"
         >
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back to {industryData.name} Agents
+          <ArrowLeft className="mr-2 h-4 w-4" /> Back to {agentData.agentType} Agents
         </Link>
         
         {/* Header Section */}

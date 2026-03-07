@@ -79,7 +79,7 @@ export default function Home() {
           {showcaseAgents.map((agent) => (
             <Link 
               key={agent.slug}
-              href={`/use-cases/${agent.industrySlug}/${agent.slug}`}
+              href={`/use-cases/${agent.industrySlug}/roles/${agent.agentType.toLowerCase()}/${agent.slug}`}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-gray-800 text-sm text-gray-300 hover:bg-zinc-800 hover:text-white hover:border-blue-500/50 transition-colors"
             >
               <Target className={`h-3 w-3 ${

@@ -73,7 +73,7 @@ export default function IndustryPage({ params }: { params: { industry: string } 
               return (
                 <Link
                   key={type.slug}
-                  href={`/use-cases/${industry.slug}/${type.slug}`}
+                  href={`/use-cases/${industry.slug}/roles/${type.slug}`}
                   className="group block h-full"
                 >
                   <div className={`flex flex-col p-8 border border-gray-800 rounded-3xl bg-black hover:border-${type.color}-500/50 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.15)] transition-all duration-300 h-full relative overflow-hidden`}>

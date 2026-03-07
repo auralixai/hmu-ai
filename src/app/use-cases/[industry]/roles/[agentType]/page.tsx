@@ -87,7 +87,7 @@ export default function AgentTypePage({ params }: { params: { industry: string; 
             {filteredAgents.map(agent => (
               <Link
                 key={agent.slug}
-                href={`/use-cases/${industrySlug}/${agent.slug}`}
+                href={`/use-cases/${industrySlug}/roles/${agentTypeSlug}/${agent.slug}`}
                 className="group block h-full"
               >
                 <div className="flex flex-col p-8 border border-gray-800 rounded-3xl bg-zinc-950 hover:border-white/20 hover:bg-zinc-900 transition-all duration-300 h-full relative overflow-hidden">
