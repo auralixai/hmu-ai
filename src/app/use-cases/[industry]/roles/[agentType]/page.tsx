@@ -12,6 +12,14 @@ const agentTypeData = {
   operator: { name: "Operator", icon: Code, color: "purple", description: "Daily operations, process automation, customer support, and system maintenance." },
 };
 
+// Helper to map colors to Tailwind classes
+const themeMap = {
+  blue: { text: "text-blue-400", ring: "ring-blue-500/30", bg: "bg-blue-500/10" },
+  green: { text: "text-green-400", ring: "ring-green-500/30", bg: "bg-green-500/10" },
+  yellow: { text: "text-yellow-400", ring: "ring-yellow-500/30", bg: "bg-yellow-500/10" },
+  purple: { text: "text-purple-400", ring: "ring-purple-500/30", bg: "bg-purple-500/10" },
+};
+
 export async function generateStaticParams() {
   const params = [];
   const agentTypeSlugs = ["architect", "builder", "money", "operator"];
@@ -57,27 +65,26 @@ export default async function AgentTypePage({ params }: { params: Promise<{ indu
   );
 
   const Icon = agentTypeInfo.icon;
-  const colorClass = `text-${agentTypeInfo.color}-400`;
-  const ringColorClass = `ring-${agentTypeInfo.color}-500/30`;
+  const theme = themeMap[agentTypeInfo.color as keyof typeof themeMap];
 
   return (
     <div className="w-full">
       <section className={`py-20 md:py-28 bg-zinc-950 border-b border-gray-800`}>
         <div className="container mx-auto px-4 md:px-6 text-center">
           <div className="flex justify-center items-center mb-6">
-             <div className={`relative w-16 h-16 flex items-center justify-center bg-black rounded-2xl ring-4 ${ringColorClass}`}>
-               <Icon className={`h-8 w-8 ${colorClass}`} />
+             <div className={`relative w-16 h-16 flex items-center justify-center bg-black rounded-2xl ring-4 ${theme.ring}`}>
+               <Icon className={`h-8 w-8 ${theme.text}`} />
              </div>
           </div>
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4">
+          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4 text-white">
             {agentTypeInfo.name} Agents
           </h1>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-            Specialized <strong className={colorClass}>{agentTypeInfo.name}</strong> agents designed for the <strong className="text-white">{industry.name}</strong> industry. {agentTypeInfo.description}
+            Specialized <strong className={theme.text}>{agentTypeInfo.name}</strong> agents designed for the <strong className="text-white">{industry.name}</strong> industry. {agentTypeInfo.description}
           </p>
-          <div className="mt-4 text-sm">
-             <Link href={`/use-cases/${industry.slug}`} className="text-gray-400 hover:text-white transition-colors">
-                ← Back to {industry.name}
+          <div className="mt-8 text-sm">
+             <Link href={`/use-cases/${industry.slug}`} className="text-gray-500 hover:text-white transition-colors flex items-center justify-center gap-2 group">
+                <span className="group-hover:-translate-x-1 transition-transform">←</span> Back to {industry.name}
              </Link>
           </div>
         </div>
@@ -94,10 +101,10 @@ export default async function AgentTypePage({ params }: { params: Promise<{ indu
               >
                 <div className="flex flex-col p-8 border border-gray-800 rounded-3xl bg-zinc-950 hover:border-white/20 hover:bg-zinc-900 transition-all duration-300 h-full relative overflow-hidden">
                   <div className="flex items-center gap-4 mb-4">
-                     <Target className={`h-5 w-5 ${colorClass} flex-shrink-0`} />
-                     <h3 className="font-semibold text-lg text-white">{agent.taskName}</h3>
+                     <Target className={`h-5 w-5 ${theme.text} flex-shrink-0`} />
+                     <h3 className="font-semibold text-lg text-white group-hover:text-blue-400 transition-colors">{agent.taskName}</h3>
                   </div>
-                  <p className="text-gray-400 text-sm leading-relaxed flex-1 mb-6">{agent.taskName.slice(0, 100)}...</p>
+                  <p className="text-gray-400 text-sm leading-relaxed flex-1 mb-6">{agent.taskName}</p>
                   <div className="flex items-center justify-end text-xs font-semibold text-gray-500 group-hover:text-white transition-colors mt-auto">
                     View Agent Details <ArrowUpRight className="ml-1 h-4 w-4" />
                   </div>
