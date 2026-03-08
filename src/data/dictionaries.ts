@@ -8,6 +8,7 @@ import { devTerms } from './dictionaries/dev';
 import { ecommerceTerms } from './dictionaries/ecommerce';
 import { startupTerms } from './dictionaries/startup';
 import { financeTerms } from './dictionaries/finance';
+import { acronymsTerms } from './dictionaries/acronyms';
 
 export interface Term {
   name: string;
@@ -31,6 +32,7 @@ export const dictionaries: Record<string, Term[]> = {
   'ecommerce-dictionary': ecommerceTerms,
   'startup-dictionary': startupTerms,
   'finance-dictionary': financeTerms,
+  'acronyms-dictionary': acronymsTerms,
 };
 
 export const dictionaryMetadata: Record<string, { title: string, description: string }> = {
@@ -44,6 +46,7 @@ export const dictionaryMetadata: Record<string, { title: string, description: st
   'ecommerce-dictionary': { title: 'E-Commerce Dictionary', description: 'Terms related to online stores and retail.' },
   'startup-dictionary': { title: 'Startup Dictionary', description: 'Glossary for founders, venture capital, and startups.' },
   'finance-dictionary': { title: 'Finance Dictionary', description: 'Accounting, investing, and financial metrics.' },
+  'acronyms-dictionary': { title: 'Acronyms Dictionary', description: 'Common business, tech, and digital acronyms decoded.' },
 };
 
 export function getDictionaryTerms(slug: string): Term[] {
