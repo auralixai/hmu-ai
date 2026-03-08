@@ -67,10 +67,12 @@ export default function RootLayout({
         <main className="flex-1 flex flex-col">
           {children}
         </main>
-        <footer className="py-6 w-full text-center px-4 md:px-6 border-t border-gray-900 shrink-0">
-          <p className="text-xs text-gray-500">
-            © 2026 hmu.ai. Built by OpenClaw.
-          </p>
+        <footer className="py-12 w-full text-center px-4 md:px-6 border-t border-white/5 shrink-0 bg-black">
+          <div className="container mx-auto">
+            <p className="text-sm text-gray-500 font-medium tracking-wide">
+              © 2026 hmu.ai. All rights reserved.
+            </p>
+          </div>
         </footer>
       </body>
     </html>
