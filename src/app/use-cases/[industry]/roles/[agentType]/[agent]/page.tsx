@@ -12,9 +12,10 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { industry: string, agentType: string, agent: string } }) {
-  const industryData = getIndustryBySlug(params.industry);
-  const agentData = getAgentBySlug(params.industry, params.agent);
+export async function generateMetadata({ params }: { params: Promise<{ industry: string, agentType: string, agent: string }> }) {
+  const resolvedParams = await params;
+  const industryData = getIndustryBySlug(resolvedParams.industry);
+  const agentData = getAgentBySlug(resolvedParams.industry, resolvedParams.agent);
 
   if (!agentData || !industryData) return { title: "Agent Not Found" };
 
@@ -24,11 +25,12 @@ export async function generateMetadata({ params }: { params: { industry: string,
   };
 }
 
-export default async function AgentPage({ params }: { params: { industry: string, agentType: string, agent: string } }) {
-  const industryData = getIndustryBySlug(params.industry);
-  const agentData = getAgentBySlug(params.industry, params.agent);
+export default async function AgentPage({ params }: { params: Promise<{ industry: string, agentType: string, agent: string }> }) {
+  const resolvedParams = await params;
+  const industryData = getIndustryBySlug(resolvedParams.industry);
+  const agentData = getAgentBySlug(resolvedParams.industry, resolvedParams.agent);
 
-  if (!agentData || !industryData || agentData.agentType.toLowerCase() !== params.agentType) {
+  if (!agentData || !industryData || agentData.agentType.toLowerCase() !== resolvedParams.agentType) {
     notFound();
   }
 
@@ -44,7 +46,7 @@ export default async function AgentPage({ params }: { params: { industry: string
     <div className="min-h-screen bg-black text-white py-24">
       <div className="container px-4 md:px-6 mx-auto max-w-5xl">
         <Link 
-          href={`/use-cases/${industryData.slug}/roles/${params.agentType}`} 
+          href={`/use-cases/${industryData.slug}/roles/${resolvedParams.agentType}`} 
           className="inline-flex items-center text-gray-400 hover:text-white mb-10 transition-colors"
         >
           <ArrowLeft className="mr-2 h-4 w-4" /> Back to {agentData.agentType} Agents

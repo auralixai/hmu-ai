@@ -1,25 +1,29 @@
-import { industries } from "@/data/industries";
+import { industries, getIndustryBySlug } from "@/data/industries";
 import { agentUseCases } from "@/data/agents";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Briefcase, Hammer, DollarSign, Code, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
 
+// 1. Generate Static Params for pSEO
 export async function generateStaticParams() {
   return industries.map(industry => ({
     industry: industry.slug,
   }));
 }
 
-export async function generateMetadata({ params }: { params: { industry: string } }): Promise<Metadata> {
-  const industry = industries.find(i => i.slug === params.industry);
+// 2. Generate Dynamic Metadata (Awaiting params for Next.js 15+)
+export async function generateMetadata({ params }: { params: Promise<{ industry: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const industry = industries.find(i => i.slug === resolvedParams.industry);
+  
   if (!industry) {
     return {
       title: "Industry Not Found"
     }
   }
   return {
-    title: `AI Agent Use Cases for ${industry.name}`,
+    title: `AI Agent Use Cases for ${industry.name} | hmu.ai`,
     description: industry.description,
   };
 }
@@ -31,8 +35,10 @@ const agentTypes = [
   { name: "Operator", slug: "operator", description: "Daily operations, process automation, customer support, and system maintenance.", icon: Code, color: "purple" },
 ];
 
-export default function IndustryPage({ params }: { params: { industry: string } }) {
-  const industry = industries.find(i => i.slug === params.industry);
+// 3. Main Industry Page Component (Awaiting params for Next.js 15+)
+export default async function IndustryPage({ params }: { params: Promise<{ industry: string }> }) {
+  const resolvedParams = await params;
+  const industry = industries.find(i => i.slug === resolvedParams.industry);
 
   if (!industry) {
     notFound();
@@ -76,16 +82,16 @@ export default function IndustryPage({ params }: { params: { industry: string } 
                   href={`/use-cases/${industry.slug}/roles/${type.slug}`}
                   className="group block h-full"
                 >
-                  <div className={`flex flex-col p-8 border border-gray-800 rounded-3xl bg-black hover:border-${type.color}-500/50 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.15)] transition-all duration-300 h-full relative overflow-hidden`}>
-                     <div className={`absolute top-0 right-0 bg-${type.color}-500/10 text-${type.color}-400 text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-3xl`}>
+                  <div className={`flex flex-col p-8 border border-gray-800 rounded-3xl bg-black hover:border-blue-500/50 hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.15)] transition-all duration-300 h-full relative overflow-hidden`}>
+                     <div className="absolute top-0 right-0 bg-blue-500/10 text-blue-400 text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-3xl">
                        {count} Agents
                     </div>
-                    <div className={`p-4 bg-${type.color}-500/10 rounded-2xl w-fit mb-6 text-${type.color}-500 group-hover:scale-110 transition-transform`}>
+                    <div className="p-4 bg-blue-500/10 rounded-2xl w-fit mb-6 text-blue-500 group-hover:scale-110 transition-transform">
                       <Icon className="h-8 w-8" />
                     </div>
                     <h3 className="font-bold text-2xl mb-3">{type.name}</h3>
                     <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-1">{type.description}</p>
-                    <div className={`flex items-center text-sm font-semibold text-${type.color}-400 group-hover:text-${type.color}-300 transition-colors mt-auto`}>
+                    <div className="flex items-center text-sm font-semibold text-blue-400 group-hover:text-blue-300 transition-colors mt-auto">
                       View Agents <ArrowUpRight className="ml-1 h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                     </div>
                   </div>

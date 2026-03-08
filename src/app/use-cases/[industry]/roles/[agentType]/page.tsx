@@ -23,9 +23,10 @@ export async function generateStaticParams() {
   return params;
 }
 
-export async function generateMetadata({ params }: { params: { industry: string; agentType: string } }): Promise<Metadata> {
-  const industry = industries.find(i => i.slug === params.industry);
-  const agentTypeInfo = agentTypeData[params.agentType as keyof typeof agentTypeData];
+export async function generateMetadata({ params }: { params: Promise<{ industry: string; agentType: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const industry = industries.find(i => i.slug === resolvedParams.industry);
+  const agentTypeInfo = agentTypeData[resolvedParams.agentType as keyof typeof agentTypeData];
 
   if (!industry || !agentTypeInfo) {
     return {
@@ -34,13 +35,14 @@ export async function generateMetadata({ params }: { params: { industry: string;
   }
 
   return {
-    title: `${agentTypeInfo.name} Agents for ${industry.name}`,
+    title: `${agentTypeInfo.name} Agents for ${industry.name} | hmu.ai`,
     description: `Browse specialized ${agentTypeInfo.name} AI agents for the ${industry.name} industry. ${agentTypeInfo.description}`,
   };
 }
 
-export default function AgentTypePage({ params }: { params: { industry: string; agentType: string } }) {
-  const { industry: industrySlug, agentType: agentTypeSlug } = params;
+export default async function AgentTypePage({ params }: { params: Promise<{ industry: string; agentType: string }> }) {
+  const resolvedParams = await params;
+  const { industry: industrySlug, agentType: agentTypeSlug } = resolvedParams;
 
   const industry = industries.find(i => i.slug === industrySlug);
   const agentTypeInfo = agentTypeData[agentTypeSlug as keyof typeof agentTypeData];
