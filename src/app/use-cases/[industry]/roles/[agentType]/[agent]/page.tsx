@@ -64,8 +64,8 @@ export default async function AgentPage({ params }: { params: Promise<{ industry
             Stop doing this manually. Deploy an autonomous {agentData.agentType} agent to handle {agentData.taskName.toLowerCase()} entirely in the background.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <Link href="/pricing" className="inline-flex h-12 items-center justify-center rounded-md bg-white px-8 text-sm font-bold text-black shadow transition-colors hover:bg-gray-200">
-              Deploy This Agent Now
+            <Link href="/waitlist" className="inline-flex h-12 items-center justify-center rounded-md bg-white px-8 text-sm font-bold text-black shadow transition-colors hover:bg-gray-200">
+              Get Started
             </Link>
           </div>
         </div>

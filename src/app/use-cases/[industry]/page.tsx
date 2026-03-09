@@ -136,10 +136,10 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
         <div className="container px-4 md:px-6 mx-auto text-center">
           <h2 className="text-3xl font-bold tracking-tighter mb-8">Ready to automate your {industry.name.toLowerCase()}?</h2>
           <Link
-            href="/pricing"
+            href="/waitlist"
             className="inline-flex h-14 items-center justify-center rounded-full bg-white px-10 text-base font-bold text-black shadow-xl hover:bg-gray-200 hover:scale-105 transition-all"
           >
-            Start Building Your AI Team <ArrowRight className="ml-2 h-5 w-5" />
+            Get Started <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </div>
       </section>

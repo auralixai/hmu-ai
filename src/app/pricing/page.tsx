@@ -84,7 +84,7 @@ export default function Pricing() {
                 ))}
               </ul>
               <Link
-                href="#signup"
+                href="/waitlist"
                 className={`w-full flex items-center justify-center h-12 rounded-xl font-bold transition-all duration-200 ${
                   tier.popular
                     ? 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 shadow-lg shadow-blue-500/25'
