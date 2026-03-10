@@ -1,7 +1,29 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Zap, CheckCircle, ShieldCheck } from "lucide-react";
+import { useState } from "react";
 
 export default function Waitlist() {
+  const [loading, setLoading] = useState(false);
+
+  const handleAlphaAccess = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/checkout", { method: "POST" });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.error("No checkout url returned", data);
+      }
+    } catch (err) {
+      console.error("Error creating checkout session", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white py-24 flex flex-col items-center justify-center relative overflow-hidden">
       {/* Background glow */}
@@ -60,13 +82,14 @@ export default function Waitlist() {
             <p className="text-gray-400 leading-relaxed mb-6">
               Want immediate access to the hmu.ai Engine? A limited number of <strong>Early Access</strong> slots are available for <strong>$99/mo</strong>. Help us battle-test the alpha and shape the product.
             </p>
-            <Link 
-              href="/pricing"
-              className="inline-flex items-center text-white font-bold group-hover:underline gap-2"
+            <button 
+              onClick={handleAlphaAccess}
+              disabled={loading}
+              className="inline-flex items-center text-white font-bold group-hover:underline gap-2 disabled:opacity-50"
             >
-              View Alpha Access Plans
+              {loading ? "Loading..." : "Get Alpha Access Now ($99/mo)"}
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </button>
           </div>
         </div>
 
