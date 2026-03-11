@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 
@@ -67,6 +68,7 @@ export default function RootLayout({
         <main className="flex-1 flex flex-col">
           {children}
         </main>
+        <Analytics />
         <footer className="py-12 w-full text-center px-4 md:px-6 border-t border-white/5 shrink-0 bg-black">
           <div className="container mx-auto">
             <p className="text-sm text-gray-500 font-medium tracking-wide">
