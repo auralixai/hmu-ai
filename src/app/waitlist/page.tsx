@@ -52,7 +52,7 @@ export default function Waitlist() {
           <form className="flex flex-col gap-4">
             <input 
               type="email" 
-              placeholder="Enter your work email" 
+              placeholder="Enter your email" 
               className="w-full h-14 px-6 rounded-xl bg-black border border-gray-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all outline-none text-lg"
               required
             />
