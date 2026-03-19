@@ -6,6 +6,8 @@ import { useState } from "react";
 
 export default function Waitlist() {
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleAlphaAccess = async () => {
     try {
@@ -21,6 +23,22 @@ export default function Waitlist() {
       console.error("Error creating checkout session", err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleWaitlistSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) setStatus("success");
+      else setStatus("error");
+    } catch {
+      setStatus("error");
     }
   };
 
@@ -49,19 +67,22 @@ export default function Waitlist() {
           
           <h2 className="text-2xl font-bold mb-8">Reserve your spot</h2>
           
-          <form className="flex flex-col gap-4">
+          <form onSubmit={handleWaitlistSubmit} className="flex flex-col gap-4">
             <input 
               type="email" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email" 
               className="w-full h-14 px-6 rounded-xl bg-black border border-gray-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all outline-none text-lg"
               required
             />
             <button 
               type="submit"
+              disabled={status === "loading" || status === "success"}
               className="w-full h-14 bg-white text-black font-bold rounded-xl text-lg hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
             >
-              Join the Waitlist
-              <ArrowRight className="h-5 w-5" />
+              {status === "loading" ? "Joining..." : status === "success" ? "You're on the list!" : "Join the Waitlist"}
+              {status === "idle" && <ArrowRight className="h-5 w-5" />}
             </button>
           </form>
           
