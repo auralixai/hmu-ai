@@ -80,14 +80,14 @@ export default function Waitlist() {
               Skip the Queue: Alpha Access
             </h3>
             <p className="text-gray-400 leading-relaxed mb-6">
-              Want immediate access to the hmu.ai Engine? A limited number of <strong>Early Access</strong> slots are available for <strong>$99/mo</strong>. Help us battle-test the alpha and shape the product.
+              Want immediate access to the hmu.ai Engine? A limited number of <strong>Early Access</strong> slots are available. Deposit $99 to help us battle-test the alpha and shape the product.
             </p>
             <button 
               onClick={handleAlphaAccess}
               disabled={loading}
               className="inline-flex items-center text-white font-bold group-hover:underline gap-2 disabled:opacity-50"
             >
-              {loading ? "Loading..." : "Get Alpha Access Now ($99/mo)"}
+              {loading ? "Loading..." : "Be The First to Get Access Deposit $99"}
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
