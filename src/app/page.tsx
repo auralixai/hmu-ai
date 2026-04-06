@@ -18,48 +18,46 @@ export default function Home() {
         <div className="container px-4 md:px-6 mx-auto text-center relative z-10">
           <div className="flex flex-col items-center space-y-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm font-medium mb-4">
-              <Zap className="h-4 w-4 text-blue-400" /> hmu.ai Engine 2.0 is Live
+              <Zap className="h-4 w-4 text-blue-400" /> The End of the "Advisor Trap"
             </div>
             <h1 className="text-5xl font-bold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl max-w-5xl">
-              10x Your Output <br className="hidden md:block"/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500">Without Hiring.</span>
+              Stop Hiring Consultants. <br className="hidden md:block"/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500">Deploy a Digital Workforce.</span>
             </h1>
             <p className="mx-auto max-w-[800px] text-gray-400 md:text-xl leading-relaxed">
-              Deploy over <strong className="text-white">520+ highly specialized AI agents</strong> across 8 industries in seconds. From writing production code to qualifying real estate leads—your 24/7 autonomous workforce is waiting.
+              Combining 18+ years of enterprise sales expertise with autonomous, headless server AI deployment. We don't give you advice; we build the machine that executes it.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 pt-4">
               <Link
                 className="inline-flex h-14 items-center justify-center rounded-full bg-blue-600 px-8 text-base font-bold text-white shadow-lg shadow-blue-500/25 transition-all hover:bg-blue-500 hover:scale-105"
-                href="/use-cases"
+                href="/pricing"
               >
-                View Agent Library <ArrowRight className="ml-2 h-5 w-5" />
+                Map Your Architecture <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
                 className="inline-flex h-14 items-center justify-center rounded-full bg-zinc-900 border border-gray-800 px-8 text-base font-bold text-white transition-all hover:bg-zinc-800 hover:border-gray-700"
                 href="/waitlist"
               >
-                Get Started
+                Get Alpha Access
               </Link>
             </div>
 
-            {/* Stats Bar */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mt-16 pt-12 border-t border-white/10 w-full max-w-4xl opacity-80">
-              <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-white mb-1">520+</span>
-                <span className="text-xs text-gray-400 uppercase tracking-wider">Autonomous Agents</span>
+            {/* Social Proof Bar */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mt-16 pt-12 border-t border-white/10 w-full max-w-4xl text-left">
+              <div className="flex flex-col p-6 rounded-2xl bg-white/5 border border-white/10">
+                <h3 className="font-bold text-lg text-white mb-2 flex items-center gap-2">
+                  <Target className="h-5 w-5 text-blue-400"/>
+                  Texas Foreclosure Pipeline
+                </h3>
+                <p className="text-sm text-gray-400">Autonomous ingestion of county records, cross-referenced with skip tracing APIs, feeding directly into a multi-channel outreach sequence.</p>
               </div>
-              <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-white mb-1">8</span>
-                <span className="text-xs text-gray-400 uppercase tracking-wider">Supported Industries</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-white mb-1">960+</span>
-                <span className="text-xs text-gray-400 uppercase tracking-wider">Strategy Definitions</span>
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="text-3xl font-bold text-white mb-1">24/7</span>
-                <span className="text-xs text-gray-400 uppercase tracking-wider">Flawless Execution</span>
+              <div className="flex flex-col p-6 rounded-2xl bg-white/5 border border-white/10">
+                <h3 className="font-bold text-lg text-white mb-2 flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-purple-400"/>
+                  Apollo API/LinkedIn Engine
+                </h3>
+                <p className="text-sm text-gray-400">Continuous programmatic enrichment. We don't just scrape; we synthesize signals to trigger context-aware interactions at scale.</p>
               </div>
             </div>
           </div>
@@ -98,10 +96,10 @@ export default function Home() {
         <div className="container px-4 md:px-6 mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-6">
-              The <span className="text-blue-500">4 Pillars</span> of Scale
+              The <span className="text-blue-500">Digital Workforce</span> Grid
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Every business requires four distinct roles to function. We've automated all of them so you can step back and play the role of the owner.
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Why role-based AI dominates generic chatbots. By utilizing the QMD (Quantum Modular Design) and TOON frameworks, our specialized agents achieve unprecedented token efficiency with <strong className="text-white">zero hallucinations</strong>.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -111,7 +109,7 @@ export default function Home() {
               </div>
               <h3 className="font-bold text-2xl mb-4">Architect</h3>
               <p className="text-gray-400 leading-relaxed">
-                Designs complex systems, maps out marketing funnels, and outlines your high-level technical vision before a single line of code is written.
+                Designs the systems, maps the data flows, and structures the operational reality of your business before a single API is hit.
               </p>
             </div>
             <div className="group flex flex-col p-8 border border-gray-800 rounded-3xl bg-black hover:border-green-500/50 hover:shadow-[0_0_30px_-5px_rgba(34,197,94,0.15)] transition-all duration-300">
@@ -120,7 +118,7 @@ export default function Home() {
               </div>
               <h3 className="font-bold text-2xl mb-4">Builder</h3>
               <p className="text-gray-400 leading-relaxed">
-                Rolls up their sleeves to execute tasks, write flawless production code, generate assets, and build the infrastructure the Architect designed.
+                Rolls up their sleeves to write the scripts, integrate the external APIs, and deploy the headless infrastructure the Architect designed.
               </p>
             </div>
             <div className="group flex flex-col p-8 border border-gray-800 rounded-3xl bg-black hover:border-yellow-500/50 hover:shadow-[0_0_30px_-5px_rgba(234,179,8,0.15)] transition-all duration-300">
@@ -129,7 +127,7 @@ export default function Home() {
               </div>
               <h3 className="font-bold text-2xl mb-4">Money</h3>
               <p className="text-gray-400 leading-relaxed">
-                Acts as your CFO. Manages financial tracking, monitors ad spend ROAS, chases unpaid invoices, and connects directly to Stripe/Crypto protocols.
+                Focuses strictly on revenue-generating actions: lead scoring, outreach qualification, tracking ROAS, and maximizing pipeline velocity.
               </p>
             </div>
             <div className="group flex flex-col p-8 border border-gray-800 rounded-3xl bg-black hover:border-purple-500/50 hover:shadow-[0_0_30px_-5px_rgba(168,85,247,0.15)] transition-all duration-300">
@@ -138,7 +136,7 @@ export default function Home() {
               </div>
               <h3 className="font-bold text-2xl mb-4">Operator</h3>
               <p className="text-gray-400 leading-relaxed">
-                The engine that never stops. Runs daily operations, handles tier-1 customer support, qualifies inbound leads, and maintains system memory.
+                The engine that never stops. Maintains the systems, handles exceptions, qualifies inbound leads, and ensures the machine runs 24/7 without fatigue.
               </p>
             </div>
           </div>
