@@ -1,30 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Zap, CheckCircle, ShieldCheck } from "lucide-react";
+import { ArrowRight, Zap, CheckCircle } from "lucide-react";
 import { useState } from "react";
 
 export default function Waitlist() {
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-
-  const handleAlphaAccess = async () => {
-    try {
-      setLoading(true);
-      const res = await fetch("/api/checkout", { method: "POST" });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        console.error("No checkout url returned", data);
-      }
-    } catch (err) {
-      console.error("Error creating checkout session", err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,29 +73,7 @@ export default function Waitlist() {
           </p>
         </div>
 
-        {/* Priority Access Section */}
-        <div className="p-8 border border-blue-500/20 bg-blue-500/5 rounded-3xl text-left flex flex-col md:flex-row items-center gap-8 group hover:border-blue-500/40 transition-all">
-          <div className="shrink-0 w-16 h-16 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-500">
-            <ShieldCheck className="h-10 w-10" />
-          </div>
-          <div>
-            <h3 className="text-2xl font-bold mb-2 flex items-center gap-2 text-blue-400">
-              Skip the Queue: Alpha Access
-            </h3>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              Want immediate access to the hmu.ai Engine? A limited number of <strong>Early Access</strong> slots are available. Deposit $99 to help us battle-test the alpha and shape the product.
-            </p>
-            <button 
-              onClick={handleAlphaAccess}
-              disabled={loading}
-              className="inline-flex items-center text-white font-bold group-hover:underline gap-2 disabled:opacity-50"
-            >
-              {loading ? "Loading..." : "Be The First to Get Access Deposit $99"}
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </div>
-
+        {/* Features Row */}
         <div className="mt-16 pt-12 border-t border-white/5 flex flex-wrap justify-center gap-8 opacity-50">
           <div className="flex items-center gap-2 text-sm">
             <CheckCircle className="h-4 w-4 text-green-500" /> Secure Data
