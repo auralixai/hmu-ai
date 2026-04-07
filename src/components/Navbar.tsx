@@ -55,10 +55,10 @@ export function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center">
           <Link 
-            href="/waitlist"
+            href="/insider"
             className="inline-flex h-10 items-center justify-center rounded-full bg-white px-6 text-sm font-bold text-black shadow transition-transform hover:scale-105"
           >
-            Get Started
+            Become an Insider
           </Link>
         </div>
 
@@ -86,11 +86,11 @@ export function Navbar() {
             </Link>
           ))}
           <Link 
-            href="/waitlist"
+            href="/insider"
             className="inline-flex h-12 w-full items-center justify-center rounded-lg bg-blue-600 px-6 text-base font-bold text-white shadow transition-colors hover:bg-blue-500 mt-2"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Get Started
+            Become an Insider
           </Link>
         </div>
       )}

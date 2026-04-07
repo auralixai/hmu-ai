@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Zap, CheckCircle } from "lucide-react";
 import { useState } from "react";
 
-export default function Waitlist() {
+export default function Insider() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -31,23 +31,23 @@ export default function Waitlist() {
 
       <div className="container px-4 md:px-6 mx-auto max-w-3xl text-center relative z-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-8">
-          <Zap className="h-3 w-3" /> Early Access Phase
+          <Zap className="h-3 w-3" /> Exclusive Intelligence
         </div>
 
         <h1 className="text-5xl md:text-6xl font-bold tracking-tighter mb-6">
-          The Future of Work <br/>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500">is Almost Here.</span>
+          Become an <br/>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500">Insider.</span>
         </h1>
         
         <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-          We are currently in a closed beta as we scale our agent compute. Join the waitlist to be notified when we open public registration.
+          Get weekly, hyper-technical breakdowns of the exact autonomous sales pipelines we are deploying for 7 and 8-figure brands. No fluff. Just architecture.
         </p>
 
         {/* Email Capture Form */}
         <div className="bg-zinc-950 border border-gray-800 p-8 md:p-12 rounded-3xl shadow-2xl mb-12 relative overflow-hidden group">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
           
-          <h2 className="text-2xl font-bold mb-8">Reserve your spot</h2>
+          <h2 className="text-2xl font-bold mb-8">Unlock the Vault</h2>
           
           <form onSubmit={handleWaitlistSubmit} className="flex flex-col gap-4">
             <input 
@@ -63,13 +63,13 @@ export default function Waitlist() {
               disabled={status === "loading" || status === "success"}
               className="w-full h-14 bg-white text-black font-bold rounded-xl text-lg hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
             >
-              {status === "loading" ? "Joining..." : status === "success" ? "You're on the list!" : "Join the Waitlist"}
+              {status === "loading" ? "Joining..." : status === "success" ? "You're an Insider!" : "Become an Insider"}
               {status === "idle" && <ArrowRight className="h-5 w-5" />}
             </button>
           </form>
           
           <p className="mt-6 text-sm text-gray-500">
-            By joining, you agree to our terms and will receive occasional updates.
+            By joining, you agree to our terms and will receive exclusive architectural breakdowns.
           </p>
         </div>
 

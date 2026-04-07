@@ -37,9 +37,9 @@ export default function Home() {
               </Link>
               <Link
                 className="inline-flex h-14 items-center justify-center rounded-full bg-zinc-900 border border-gray-800 px-8 text-base font-bold text-white transition-all hover:bg-zinc-800 hover:border-gray-700"
-                href="/waitlist"
+                href="/insider"
               >
-                Get Alpha Access
+                Become an Insider
               </Link>
             </div>
 
