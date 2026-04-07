@@ -1,7 +1,31 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Calendar, Users, MapPin, Zap, CheckCircle } from "lucide-react";
 
 export default function Workshops() {
+  const [loading, setLoading] = useState(false);
+
+  const handleCheckout = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ planId: "workshop" }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white pt-24 pb-32">
       <div className="container px-4 md:px-6 mx-auto max-w-5xl">
@@ -77,8 +101,12 @@ export default function Workshops() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[80px] -z-10 group-hover:bg-blue-500/20 transition-all"></div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to automate your operations?</h2>
           <p className="text-gray-400 mb-10 max-w-2xl mx-auto">Seats are extremely limited to ensure an intimate, high-value boardroom experience. Reserve yours today.</p>
-          <button className="inline-flex h-14 items-center justify-center rounded-xl bg-white px-10 text-lg font-bold text-black shadow-lg shadow-white/10 transition-all hover:bg-gray-200">
-            Apply for a Seat ($997) <ArrowRight className="ml-2 h-5 w-5" />
+          <button 
+            onClick={handleCheckout} 
+            disabled={loading}
+            className="inline-flex h-14 items-center justify-center rounded-xl bg-white px-10 text-lg font-bold text-black shadow-lg shadow-white/10 transition-all hover:bg-gray-200 disabled:opacity-50"
+          >
+            {loading ? "Redirecting..." : "Apply for a Seat ($997)"} <ArrowRight className="ml-2 h-5 w-5" />
           </button>
         </div>
 

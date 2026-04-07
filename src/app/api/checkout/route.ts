@@ -1,33 +1,66 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
+const plans: Record<string, any> = {
+  blueprint: {
+    name: 'The AI Sales Blueprint',
+    amount: 9700,
+    mode: 'payment',
+  },
+  core: {
+    name: 'Core Deployment',
+    amount: 250000,
+    mode: 'payment',
+  },
+  fractional: {
+    name: 'Fractional Revenue Architect',
+    amount: 500000,
+    mode: 'subscription',
+    interval: 'month'
+  },
+  workshop: {
+    name: 'Executive Workshop (Houston)',
+    amount: 99700,
+    mode: 'payment',
+  }
+};
+
 export async function POST(req: Request) {
   try {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string || 'sk_test_dummy', {
+    const { planId } = await req.json();
+    const plan = plans[planId];
+
+    if (!plan) {
+      return NextResponse.json({ error: 'Invalid plan ID' }, { status: 400 });
+    }
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
       apiVersion: '2024-06-20' as any,
     });
+
+    const priceData: any = {
+      currency: 'usd',
+      product_data: {
+        name: plan.name,
+      },
+      unit_amount: plan.amount,
+    };
+
+    if (plan.mode === 'subscription') {
+      priceData.recurring = { interval: plan.interval };
+    }
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
         {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: 'Alpha Access ($99/mo)',
-              description: 'Immediate access to the hmu.ai Engine',
-            },
-            unit_amount: 9900,
-            recurring: {
-              interval: 'month',
-            },
-          },
+          price_data: priceData,
           quantity: 1,
         },
       ],
-      mode: 'subscription',
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/waitlist`,
+      mode: plan.mode,
+      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://hmu.ai'}/?success=true`,
+      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://hmu.ai'}/`,
     });
 
     return NextResponse.json({ url: session.url });

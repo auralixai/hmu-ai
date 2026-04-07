@@ -1,8 +1,11 @@
-import Link from "next/link";
-import { ArrowRight, CheckCircle, Crown, Star } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 
 const tiers = [
   {
+    id: "blueprint",
     name: "The AI Sales Blueprint",
     price: "$97",
     period: "",
@@ -15,9 +18,9 @@ const tiers = [
       "Lifetime Updates"
     ],
     buttonText: "Get The Blueprint",
-    buttonLink: "#"
   },
   {
+    id: "core",
     name: "Core Deployment",
     price: "$2,500",
     period: "+",
@@ -31,9 +34,9 @@ const tiers = [
       "30 Days of Tuning"
     ],
     buttonText: "Map Your Architecture",
-    buttonLink: "#"
   },
   {
+    id: "fractional",
     name: "Fractional Revenue Architect",
     price: "$5,000",
     period: "/mo",
@@ -47,11 +50,31 @@ const tiers = [
       "Monthly Strategy Briefings"
     ],
     buttonText: "Apply Now",
-    buttonLink: "#"
   }
 ];
 
 export default function Pricing() {
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+
+  const handleCheckout = async (planId: string) => {
+    try {
+      setLoadingId(planId);
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ planId }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingId(null);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white py-32">
       <div className="container px-4 md:px-6 mx-auto">
@@ -92,17 +115,18 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
-              <Link
-                href={tier.buttonLink}
+              <button
+                onClick={() => handleCheckout(tier.id)}
+                disabled={loadingId === tier.id}
                 className={`w-full flex items-center justify-center h-14 rounded-xl font-bold transition-all duration-200 ${
                   tier.popular
                     ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/25'
                     : 'bg-white text-black hover:bg-gray-200'
-                }`}
+                } disabled:opacity-50`}
               >
-                {tier.buttonText}
+                {loadingId === tier.id ? "Loading..." : tier.buttonText}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </button>
             </div>
           ))}
         </div>
