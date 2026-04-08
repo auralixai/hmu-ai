@@ -148,13 +148,13 @@ export default function Home() {
         <div className="container px-4 md:px-6 mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">Who We Help</h2>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">Industries We Scale</h2>
               <p className="text-gray-400 md:text-xl max-w-2xl">
-                We've trained 65 hyper-focused agents for each of these core industries.
+                See exactly how our autonomous pipelines map to specific industries.
               </p>
             </div>
             <Link href="/use-cases" className="text-blue-400 hover:text-blue-300 font-semibold flex items-center group">
-              View All Use Cases <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform"/>
+              View All 520+ Pipeline Templates <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform"/>
             </Link>
           </div>
           <div className="grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
@@ -168,12 +168,12 @@ export default function Home() {
                 >
                   <div className="flex flex-col p-8 border border-gray-800 rounded-3xl bg-zinc-950 hover:border-blue-500/50 hover:bg-zinc-900 transition-all duration-300 h-full relative overflow-hidden">
                     <div className="absolute top-0 right-0 bg-blue-500/10 text-blue-400 text-xs font-bold px-3 py-1 rounded-bl-xl rounded-tr-3xl">
-                      {industryAgents} Agents
+                      {industryAgents} Architectures
                     </div>
                     <h3 className="font-bold text-2xl mb-3 pr-8">{name}</h3>
                     <p className="text-gray-400 leading-relaxed mb-8 flex-1">{heroHeadline}</p>
                     <div className="flex items-center text-sm font-semibold text-blue-400 group-hover:text-blue-300 transition-colors mt-auto">
-                      Explore Agents <ArrowUpRight className="ml-1 h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                      Explore Pipelines <ArrowUpRight className="ml-1 h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                     </div>
                   </div>
                 </Link>
@@ -190,10 +190,10 @@ export default function Home() {
             <BookOpen className="h-10 w-10 text-purple-500" />
           </div>
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-6">
-            Master the Language of AI & Business
+            The Sales & AI Architecture Vault
           </h2>
           <p className="text-xl text-gray-400 mb-10">
-            Don't know what an LLM or ROAS is? We compiled over 960+ definitions, examples, and deep dives across 10 comprehensive dictionaries. 
+            We don't gatekeep strategy. Access our complete definitions, frameworks, and deep dives across technical execution and B2B sales motion.
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-10">
             {Object.keys(dictionaryMetadata).slice(0, 6).map(slug => (
