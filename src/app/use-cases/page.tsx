@@ -15,7 +15,7 @@ const iconMap: Record<string, any> = {
 
 export const metadata = {
   title: "AI Agent Use Cases by Industry | hmu.ai",
-  description: "Deploy specialized AI agents tailored to your industry in seconds. Discover how hmu.ai can automate e-commerce, real estate, SaaS, and more.",
+  description: "Explore autonomous pipelines tailored to your industry. Discover how hmu.ai can scale e-commerce, real estate, SaaS, and more.",
 };
 
 export default function UseCasesPage() {
@@ -29,10 +29,10 @@ export default function UseCasesPage() {
             <Zap className="h-4 w-4" /> Solutions for Every Niche
           </div>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">
-            Choose Your Industry – Deploy Specialized <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">AI Agents</span> in Seconds
+            Choose Your Industry – <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Scale with Pipelines</span>
           </h1>
           <p className="text-xl text-gray-400">
-            Stop spending hours configuring generic tools. Pick your industry and launch pre-trained agent workflows built specifically for your business model.
+            Stop spending hours configuring generic tools. Pick your industry and explore high-converting architectural maps built specifically for your business model.
           </p>
         </div>
 
