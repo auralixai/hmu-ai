@@ -22,8 +22,8 @@ const tiers = [
   {
     id: "core",
     name: "Core Deployment",
-    price: "$2,500",
-    period: "+",
+    price: "$3,000",
+    period: "/mo",
     description: "Done-for-you installation of a specific pipeline on a headless server.",
     popular: true,
     features: [
@@ -38,7 +38,7 @@ const tiers = [
   {
     id: "fractional",
     name: "Fractional Revenue Architect",
-    price: "$5,000",
+    price: "$7,500",
     period: "/mo",
     description: "High-level VP of Sales strategy + full digital workforce deployment and maintenance.",
     popular: false,
